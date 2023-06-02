@@ -88,6 +88,7 @@ export default function Home() {
         openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
         streaming: true,
         modelName: "gpt-3.5-turbo",
+        temperature: 1,
         // callbacks: [
         //   {
         //     handleLLMNewToken(token: string) {
@@ -127,7 +128,7 @@ export default function Home() {
     setIsAnswerLoading(true);
 
     const res = await chain.call({
-      question: prompt,
+      question: "if I say 'quiz me' you need to ask me a question based on the context, otherwise, respond to me normally"+ prompt + "based on the context",
       chat_history: chatHistory,
     });
 
@@ -185,7 +186,7 @@ export default function Home() {
         <div className="w-full overflow-y-auto h-full flex flex-col mb-20 px-8 py-2">
           <div className="mb-4 flex justify-start">
             <div className="bg-stone-50 rounded-lg px-4 py-3 ring-1 ring-stone-200 text-stone-700">
-              Hi there! Ask me something related to the url.
+              Hi there! Need to study? Just say "Ask me a question" and I'll quiz you! Or ask me something related to the url.
             </div>
           </div>
 
@@ -235,7 +236,7 @@ export default function Home() {
                   </span>
                 ) : (
                   <span className="inline-flex gap-2">
-                    Cognite <p>🔥</p>
+                    Ask <p>🔥</p>
                   </span>
                 )}
               </button>
